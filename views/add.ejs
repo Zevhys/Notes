@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Note</title>
+  <style>
+    .warning-text {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Add New Note</h1>
+  <form id="noteForm" action="/notes" method="post">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" minlength="5" maxlength="30" required spellcheck="false"
+      placeholder="Write Your Title Here..">
+    <br><br>
+    <label for="content">Content</label>
+    <textarea id="content" name="content" minlength="10" maxlength="500" required
+      placeholder="Write Your Message Here.." rows="4" cols="40" spellcheck="false"></textarea>
+    <br><br>
+    <button type="submit">Add Note</button>
+  </form>
+  <br>
+  <a href="/notes">Show All Notes</a>
+
+  <script>
+    document.getElementById('noteForm').addEventListener('submit', function (event) {
+      const title = document.getElementById('title');
+      const content = document.getElementById('content');
+
+      function isOnlySpaces(str) {
+        return str.trim().length === 0;
+      }
+
+      let isValid = true;
+
+      if (isOnlySpaces(title.value)) {
+        title.value = 'Title cannot contain only spaces.';
+        title.classList.add('warning-text');
+        isValid = false;
+      } else if (title.value === 'Title cannot contain only spaces.') {
+        title.value = '';
+        title.classList.remove('warning-text');
+        isValid = false;
+      } else {
+        title.classList.remove('warning-text');
+      }
+
+      if (isOnlySpaces(content.value)) {
+        content.value = 'Content cannot contain only spaces.';
+        content.classList.add('warning-text');
+        isValid = false;
+      } else if (content.value === 'Content cannot contain only spaces.') {
+        content.value = '';
+        content.classList.remove('warning-text');
+        isValid = false;
+      } else {
+        content.classList.remove('warning-text');
+      }
+
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  </script>
+</body>
+
+</html>

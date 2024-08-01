@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Notes</title>
+  <style>
+    .warning-text {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>All Notes</h1>
+  <a href="/notes/add">Add New Note</a>
+  <ul>
+    <% if (notes.length> 0) { %>
+      <% notes.forEach(note=> { %>
+        <li>
+          <h2>
+            <%= note.title %>
+          </h2>
+          <p>
+            <%= note.content %>
+          </p>
+          <p>
+            Created At:
+            <%= new Date(note.createdAt).toLocaleDateString('en-US', { weekday: 'long' , year: 'numeric' , month: 'long'
+              , day: 'numeric' }) %>,
+              <%= new Date(note.createdAt).toLocaleTimeString('en-US', { hour: '2-digit' , minute: '2-digit' }) %>
+          </p>
+          <form class="updateForm" action="/notes/<%= note._id %>?_method=PUT" method="post">
+            <input type="text" name="title" minlength="5" maxlength="30" required spellcheck="false"
+              placeholder="Write Your Title Here.." value="<%= note.title %>" required>
+            <textarea name="content" required minlength="10" maxlength="500" required
+              placeholder="Write Your Message Here.." rows="4" cols="40"
+              spellcheck="false"><%= note.content %></textarea>
+            <button type="submit">Update</button>
+          </form>
+          <form action="/notes/<%= note._id %>?_method=DELETE" method="post">
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+        <% }); %>
+          <% } else { %>
+            <p>No Notes Found.</p>
+            <% } %>
+  </ul>
+
+  <script>
+    document.querySelectorAll('.updateForm').forEach(form => {
+      form.addEventListener('submit', function (event) {
+        const title = form.querySelector('input[name="title"]');
+        const content = form.querySelector('textarea[name="content"]');
+
+        function isOnlySpaces(str) {
+          return str.trim().length === 0;
+        }
+
+        let isValid = true;
+
+        if (isOnlySpaces(title.value)) {
+          title.value = 'Title cannot contain only spaces.';
+          title.classList.add('warning-text');
+          isValid = false;
+        } else if (title.value === 'Title cannot contain only spaces.') {
+          title.value = '';
+          title.classList.remove('warning-text');
+          isValid = false;
+        } else {
+          title.classList.remove('warning-text');
+        }
+
+        if (isOnlySpaces(content.value)) {
+          content.value = 'Content cannot contain only spaces.';
+          content.classList.add('warning-text');
+          isValid = false;
+        } else if (content.value === 'Content cannot contain only spaces.') {
+          content.value = '';
+          content.classList.remove('warning-text');
+          isValid = false;
+        } else {
+          content.classList.remove('warning-text');
+        }
+
+        if (!isValid) {
+          event.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

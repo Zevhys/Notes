@@ -25,4 +25,5 @@ npm install
 
 # Run the application
 node index.js
+Visit http://localhost:3000 in your browser
 ```

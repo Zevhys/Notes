@@ -6,90 +6,176 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Notes</title>
   <style>
-    .warning-text {
-      color: red;
+    .notes-container {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    textarea {
+      resize: none !important;
+      letter-spacing: 2px;
+      height: 14em;
+    }
+
+    textarea:focus,
+    input:focus,
+    *:focus {
+      outline: none !important;
+    }
+
+    .form-control:focus {
+      border-color: inherit !important;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+
+    .input-group.row {
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    .warning-text::-ms-input-placeholder {
+      color: red !important;
+    }
+
+    .warning-text::placeholder {
+      color: red !important;
+    }
+
+    body {
+      font: sans-serif;
     }
   </style>
+
+  <style type="text/css">
+    .add-new-container {
+      position: sticky;
+      top: 0;
+      z-index: 696969420;
+    }
+
+    .add-new-container>a {
+      backdrop-filter: blur(1em);
+    }
+  </style>
+
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/css/all.min.css">
 </head>
 
-<body>
-  <h1>All Notes</h1>
-  <a href="/notes/add">Add New Note</a>
-  <ul>
+<body data-bs-theme="dark">
+  <h1 class="text-center fs-2 mt-4">All Notes</h1>
+  <div class="add-new-container text-center mb-4">
+    <a href="/notes/add" class="btn btn-outline-secondary rounded-0" type="button">Add New Note</a>
+  </div>
+
+  <div class="notes-container">
     <% if (notes.length> 0) { %>
       <% notes.forEach(note=> { %>
-        <li>
-          <h2>
-            <%= note.title %>
-          </h2>
-          <p>
-            <%= note.content %>
-          </p>
-          <p>
-            Created At:
-            <%= new Date(note.createdAt).toLocaleDateString('en-US', { weekday: 'long' , year: 'numeric' , month: 'long'
-              , day: 'numeric' }) %>,
-              <%= new Date(note.createdAt).toLocaleTimeString('en-US', { hour: '2-digit' , minute: '2-digit' }) %>
-          </p>
-          <form class="updateForm" action="/notes/<%= note._id %>?_method=PUT" method="post">
-            <input type="text" name="title" minlength="5" maxlength="30" required spellcheck="false"
-              placeholder="Write Your Title Here.." value="<%= note.title %>" required>
-            <textarea name="content" required minlength="10" maxlength="500" required
-              placeholder="Write Your Message Here.." rows="4" cols="40"
-              spellcheck="false"><%= note.content %></textarea>
-            <button type="submit">Update</button>
+        <div class="mb-4">
+          <form action="/notes/<%= note._id %>?_method=PUT" class="updateForm" method="post" class="mt-2">
+
+            <div class="input-group title-group">
+              <input type="text" class="form-control rounded-0" aria-label="Title" aria-describedby="title"
+                autocomplete="off" required value="<%= note.title %>" name="title">
+
+              <button class="btn btn-secondary" type="submit">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+
+              <button class="btn-delete btn btn-outline-danger rounded-0" type="button" data-id="<%= note._id %>">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+
+            </div>
+
+            <div class="input-group row">
+              <span class="input-group-text rounded-0"></span>
+
+              <textarea class="form-control rounded-0 content-input" aria-label="With textarea" name="content"
+                minlength="10" maxlength="500" rows="4" cols="40" spellcheck="false" autocomplete="off"
+                required><%= note.content %></textarea>
+
+            </div>
           </form>
-          <form action="/notes/<%= note._id %>?_method=DELETE" method="post">
-            <button type="submit">Delete</button>
-          </form>
-        </li>
+        </div>
         <% }); %>
           <% } else { %>
-            <p>No Notes Found.</p>
+            <p class="text-center">No Notes Found.</p>
             <% } %>
-  </ul>
+  </div>
 
   <script>
-    document.querySelectorAll('.updateForm').forEach(form => {
-      form.addEventListener('submit', function (event) {
+    const titlePlaceholder = "Write Your Title Here...";
+    const contentPlaceholder = "Write Your Message Here...";
+    const titlePlaceholderWarn = "Title cannot contain only spaces!";
+    const contentPlaceholderWarn = "Content cannot contain only spaces!";
+
+    function isOnlySpaces(str) {
+      return str.trim().length === 0;
+    }
+
+    function alertEmptyFunction(elem, placeholder, placeholderWarn) {
+      let isValid = true;
+
+      if (isOnlySpaces(elem.value)) {
+        elem.value = "";
+        elem.setAttribute("placeholder", placeholderWarn);
+        elem.classList.add("warning-text");
+
+        setTimeout(function () {
+          elem.setAttribute("placeholder", placeholder);
+          elem.classList.remove("warning-text");
+        }, 3500);
+
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+      document.querySelectorAll('.updateForm').forEach(form => {
         const title = form.querySelector('input[name="title"]');
         const content = form.querySelector('textarea[name="content"]');
 
-        function isOnlySpaces(str) {
-          return str.trim().length === 0;
-        }
+        title.setAttribute("placeholder", titlePlaceholder);
+        content.setAttribute("placeholder", contentPlaceholder);
 
-        let isValid = true;
+        form.addEventListener('submit', function (event) {
 
-        if (isOnlySpaces(title.value)) {
-          title.value = 'Title cannot contain only spaces.';
-          title.classList.add('warning-text');
-          isValid = false;
-        } else if (title.value === 'Title cannot contain only spaces.') {
-          title.value = '';
-          title.classList.remove('warning-text');
-          isValid = false;
-        } else {
-          title.classList.remove('warning-text');
-        }
+          let isValid = true;
 
-        if (isOnlySpaces(content.value)) {
-          content.value = 'Content cannot contain only spaces.';
-          content.classList.add('warning-text');
-          isValid = false;
-        } else if (content.value === 'Content cannot contain only spaces.') {
-          content.value = '';
-          content.classList.remove('warning-text');
-          isValid = false;
-        } else {
-          content.classList.remove('warning-text');
-        }
+          isValid = alertEmptyFunction(title, titlePlaceholder, titlePlaceholderWarn);
+          isValid = alertEmptyFunction(content, contentPlaceholder, contentPlaceholderWarn);
 
-        if (!isValid) {
-          event.preventDefault();
-        }
+          if (!isValid) {
+            event.preventDefault();
+          }
+        });
+
+        form.querySelector(".btn-delete").addEventListener('click', function () {
+          const noteId = this.getAttribute('data-id');
+
+          fetch(`/notes/${noteId}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          })
+            .then(response => {
+              window.location.href = '/notes';
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });
+        });
       });
+
     });
+
   </script>
 </body>
 

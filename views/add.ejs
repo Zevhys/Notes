@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="CCBot" content="nofollow">
+  <meta name="author" content="Zevhys">
   <title>Add New Note</title>
   <style>
     form {
@@ -46,27 +49,21 @@
       font: sans-serif;
     }
   </style>
-
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/all.min.css">
 </head>
 
 <body data-bs-theme="dark">
   <h1 class="text-center fs-2 mt-5">Add New Note</h1>
-
   <form id="noteForm" action="/notes" method="post" class="mt-5">
     <div class="input-group">
       <span class="input-group-text flex-nowrap rounded-0">Title</span>
-
       <input type="text" class="form-control rounded-0" id="title" autocomplete="off" name="title" required>
     </div>
-
     <div class="input-group row">
       <span class="input-group-text rounded-0">Content</span>
-
       <textarea class="form-control rounded-0" aria-label="With textarea" id="content" name="content" minlength="10"
         maxlength="500" rows="4" cols="40" spellcheck="false" autocomplete="off" required></textarea>
-
       <button class="btn btn-secondary" type="submit">Add Note</button>
       <a href="/notes" class="btn btn-outline-secondary rounded-0" type="button">Show All Notes</a>
     </div>
@@ -91,29 +88,23 @@
 
     function alertEmptyFunction(elem, placeholder, placeholderWarn) {
       let isValid = true;
-
       if (isOnlySpaces(elem.value)) {
         elem.value = "";
         elem.setAttribute("placeholder", placeholderWarn);
         elem.classList.add("warning-text");
-
         setTimeout(function () {
           elem.setAttribute("placeholder", placeholder);
           elem.classList.remove("warning-text");
         }, 3500);
-
         isValid = false;
       }
-
       return isValid;
     }
 
     document.getElementById('noteForm').addEventListener('submit', function (event) {
       let isValid = true;
-
       isValid = alertEmptyFunction(title, titlePlaceholder, titlePlaceholderWarn);
       isValid = alertEmptyFunction(content, contentPlaceholder, contentPlaceholderWarn);
-
       if (!isValid) {
         event.preventDefault();
       }

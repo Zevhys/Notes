@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="CCBot" content="nofollow">
+  <meta name="author" content="Zevhys">
   <title>All Notes</title>
   <style>
     .notes-container {
@@ -46,7 +49,6 @@
       font: sans-serif;
     }
   </style>
-
   <style type="text/css">
     .add-new-container {
       position: sticky;
@@ -58,9 +60,7 @@
       backdrop-filter: blur(1em);
     }
   </style>
-
   <link rel="stylesheet" href="/css/bootstrap.min.css">
-
   <link rel="stylesheet" href="/css/all.min.css">
 </head>
 
@@ -75,28 +75,21 @@
       <% notes.forEach(note=> { %>
         <div class="mb-4">
           <form action="/notes/<%= note._id %>?_method=PUT" class="updateForm" method="post" class="mt-2">
-
             <div class="input-group title-group">
               <input type="text" class="form-control rounded-0" aria-label="Title" aria-describedby="title"
                 autocomplete="off" required value="<%= note.title %>" name="title">
-
               <button class="btn btn-secondary" type="submit">
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
-
               <button class="btn-delete btn btn-outline-danger rounded-0" type="button" data-id="<%= note._id %>">
                 <i class="fa-solid fa-trash"></i>
               </button>
-
             </div>
-
             <div class="input-group row">
               <span class="input-group-text rounded-0"></span>
-
               <textarea class="form-control rounded-0 content-input" aria-label="With textarea" name="content"
                 minlength="10" maxlength="500" rows="4" cols="40" spellcheck="false" autocomplete="off"
                 required><%= note.content %></textarea>
-
             </div>
           </form>
         </div>
@@ -118,39 +111,30 @@
 
     function alertEmptyFunction(elem, placeholder, placeholderWarn) {
       let isValid = true;
-
       if (isOnlySpaces(elem.value)) {
         elem.value = "";
         elem.setAttribute("placeholder", placeholderWarn);
         elem.classList.add("warning-text");
-
         setTimeout(function () {
           elem.setAttribute("placeholder", placeholder);
           elem.classList.remove("warning-text");
         }, 3500);
-
         isValid = false;
       }
-
       return isValid;
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-
       document.querySelectorAll('.updateForm').forEach(form => {
         const title = form.querySelector('input[name="title"]');
         const content = form.querySelector('textarea[name="content"]');
-
         title.setAttribute("placeholder", titlePlaceholder);
         content.setAttribute("placeholder", contentPlaceholder);
 
         form.addEventListener('submit', function (event) {
-
           let isValid = true;
-
           isValid = alertEmptyFunction(title, titlePlaceholder, titlePlaceholderWarn);
           isValid = alertEmptyFunction(content, contentPlaceholder, contentPlaceholderWarn);
-
           if (!isValid) {
             event.preventDefault();
           }
@@ -158,7 +142,6 @@
 
         form.querySelector(".btn-delete").addEventListener('click', function () {
           const noteId = this.getAttribute('data-id');
-
           fetch(`/notes/${noteId}`, {
             method: 'DELETE',
             headers: {
@@ -173,9 +156,7 @@
             });
         });
       });
-
     });
-
   </script>
 </body>
 

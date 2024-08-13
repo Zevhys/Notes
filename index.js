@@ -25,12 +25,18 @@ app.get("/", (req, res) => {
   res.redirect("/notes/add");
 });
 
-app.listen(3000, () => console.log("Server started on port 3000"));
+app.listen(5000, () => console.log("Server started on port 5000"));
 
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use("/img", express.static(path.join(__dirname, "images")));
 
 app.use("/css", express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")));
 
 app.use("/css", express.static(path.join(__dirname, "node_modules/@fortawesome/fontawesome-free/css")));
 
 app.use("/webfonts", express.static(path.join(__dirname, "node_modules/@fortawesome/fontawesome-free/webfonts")));
+
+app.use((req, res) => {
+  res.status(404).render("404");
+});

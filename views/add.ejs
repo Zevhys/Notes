@@ -57,11 +57,12 @@
   <h1 class="text-center fs-2 mt-5">Add New Note</h1>
   <form id="noteForm" action="/notes" method="post" class="mt-5">
     <div class="input-group">
-      <span class="input-group-text flex-nowrap rounded-0">Title</span>
+      <label for="title" class="input-group-text flex-nowrap rounded-0">Title</label>
       <input type="text" class="form-control rounded-0" id="title" autocomplete="off" name="title" required>
     </div>
+
     <div class="input-group row">
-      <span class="input-group-text rounded-0">Content</span>
+      <label for="content" class="input-group-text rounded-0">Content</label>
       <textarea class="form-control rounded-0" aria-label="With textarea" id="content" name="content" minlength="10"
         maxlength="500" rows="4" cols="40" spellcheck="false" autocomplete="off" required></textarea>
       <button class="btn btn-secondary" type="submit">Add Note</button>

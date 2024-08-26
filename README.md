@@ -12,9 +12,6 @@ A simple web application for managing notes (CRUD operations) using Node.js, Exp
 
 # Installation
 ```bash
-# Clone the repository
-git clone https://github.com/username/notes-app.git
-cd notes-app
 
 # Install dependencies
 npm install
@@ -25,5 +22,5 @@ npm install
 
 # Run the application
 node index.js
-Visit http://localhost:3000 in your browser
+Visit http://localhost:5000
 ```

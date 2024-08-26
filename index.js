@@ -15,8 +15,6 @@ app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
 
-app.use(express.static("public"));
-
 const notesRoutes = require("./routes/notes");
 
 app.use("/notes", notesRoutes);
@@ -26,8 +24,6 @@ app.get("/", (req, res) => {
 });
 
 app.listen(5000, () => console.log("Server started on port 5000"));
-
-app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/img", express.static(path.join(__dirname, "images")));
 

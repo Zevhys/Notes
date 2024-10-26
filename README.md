@@ -1,4 +1,8 @@
 # Notes
+
+[![CodeQL](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml/badge.svg)](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/Zevhys/Notes/actions/workflows/eslint.yml/badge.svg)](https://github.com/Zevhys/Notes/actions/workflows/eslint.yml)
+
 A simple web application for managing notes (CRUD operations) using Node.js, Express, MongoDB, and EJS. 
 
 # Technologies

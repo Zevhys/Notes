@@ -3,7 +3,7 @@
 A simple web application for managing notes (CRUD operations) using Node.js, Express, MongoDB, and EJS. 
 
 <div align="center">
-  <img src="preview.png" height="350px">
+  <img src="preview.webp" height="350px">
 </div>
 
 # Tech Stack

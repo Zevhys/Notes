@@ -1,4 +1,6 @@
-# Notes [![CodeQL](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml/badge.svg)](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml) [![CodeQL](https://github.com/Zevhys/Notes/actions/workflows/eslint.yml/badge.svg)](https://github.com/Zevhys/Notes/actions/workflows/eslint.yml)
+# Notes 
+[![Author](http://img.shields.io/badge/author-@Zevhys-blue.svg)](https://www.linkedin.com/in/rakha-djauhari/) [![GitHub license](https://img.shields.io/github/license/Zevhys/Notes)](https://github.com/Zevhys/Notes/blob/main/LICENSE) ![GitHub repo size](https://img.shields.io/github/repo-size/Zevhys/Notes)
+[![CodeQL](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml/badge.svg)](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml) [![CodeQL](https://github.com/Zevhys/Notes/actions/workflows/eslint.yml/badge.svg)](https://github.com/Zevhys/Notes/actions/workflows/eslint.yml)
 
 A simple web application for managing notes (CRUD operations) using Node.js, Express, MongoDB, and EJS. 
 
@@ -17,17 +19,20 @@ A simple web application for managing notes (CRUD operations) using Node.js, Exp
 ![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=ffffff)
 ![FontAwesome](https://img.shields.io/badge/Font%20Awesome-339AF0?style=flat-square&logo=fontawesome&logoColor=ffffff)
 
-# Installation
+# Requirements
 ```bash
 
 # Install dependencies
 npm install
 
+# Clone Repository
+git clone https://github.com/Zevhys/Notes .
+
 # Start MongoDB
 - mongod
 - mongosh
 
-# Run the application
-node index.js
-Visit http://localhost:5000
+# Run The Application
+- node index.js
+- Visit http://localhost:5000
 ```

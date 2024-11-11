@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Note = require("../models/note.js");
 const rateLimit = require("express-rate-limit");
+const mongoose = require("mongoose");
 
 const limitter = rateLimit({
-  windowMs: 1 * 60 * 1000,
+  windowMs: 60 * 1000,
   max: 5,
   message: "Too Many Request, Try Again",
 });

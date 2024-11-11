@@ -14,12 +14,8 @@
     "body-parser": "^1.20.3",
     "bootstrap": "^5.3.3",
     "ejs": "^3.1.10",
-<<<<<<< HEAD
-    "express": "^4.19.2",
-    "express-rate-limit": "^7.4.1",
-=======
     "express": "^4.21.1",
->>>>>>> 463f70dbe22f41349bbfb1764c9b14128e32b643
+    "express-rate-limit": "^7.4.1",
     "method-override": "^3.0.0",
     "mongoose": "^8.5.1"
   },

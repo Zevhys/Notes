@@ -11,12 +11,21 @@
   "description": "SImple Web App Notes for manages daily",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
-    "body-parser": "^1.20.2",
+    "body-parser": "^1.20.3",
     "bootstrap": "^5.3.3",
     "ejs": "^3.1.10",
+<<<<<<< HEAD
     "express": "^4.19.2",
     "express-rate-limit": "^7.4.1",
+=======
+    "express": "^4.21.1",
+>>>>>>> 463f70dbe22f41349bbfb1764c9b14128e32b643
     "method-override": "^3.0.0",
     "mongoose": "^8.5.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0"
   }
 }

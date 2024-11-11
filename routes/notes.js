@@ -1,12 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Note = require("../models/note.js");
+const rateLimit = require("express-rate-limit");
+
+const limitter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 5,
+  message: "Too Many Request, Try Again",
+});
 
 router.get("/add", (req, res) => {
   res.render("add");
 });
 
-router.get("/", async (req, res) => {
+router.get("/", limitter, async (req, res) => {
   const notes = await Note.find();
   res.render("index", { notes });
 });
@@ -18,13 +25,27 @@ router.post("/", async (req, res) => {
   res.redirect("/notes");
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", limitter, async (req, res) => {
   const { title, content } = req.body;
-  await Note.findByIdAndUpdate(req.params.id, { title, content });
+
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.status(400).json({ error: "ID Not Valid" });
+  }
+
+  const updatedNote = await Note.findByIdAndUpdate(
+    req.params.id,
+    { $set: { title, content } },
+    { new: true, runValidators: true }
+  );
+
+  if (!updatedNote) {
+    return res.status(404).json({ error: "Notes Not Found" });
+  }
+
   res.redirect("/notes");
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", limitter, async (req, res) => {
   await Note.findByIdAndDelete(req.params.id);
   res.redirect("/notes");
 });

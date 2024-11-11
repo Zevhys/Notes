@@ -21,12 +21,11 @@ A simple web application for managing notes (CRUD operations) using Node.js, Exp
 
 # Requirements
 ```bash
+# Clone Repository
+git clone https://github.com/Zevhys/Notes .
 
 # Install dependencies
 npm install
-
-# Clone Repository
-git clone https://github.com/Zevhys/Notes .
 
 # Start MongoDB
 - mongod

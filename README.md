@@ -1,6 +1,7 @@
 # Notes 
 [![Author](http://img.shields.io/badge/author-@Zevhys-blue.svg)](https://www.linkedin.com/in/rakha-djauhari/) [![GitHub license](https://img.shields.io/github/license/Zevhys/Notes)](https://github.com/Zevhys/Notes/blob/main/LICENSE) ![GitHub repo size](https://img.shields.io/github/repo-size/Zevhys/Notes)
-[![CodeQL](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml/badge.svg)](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml) [![ESLint](https://img.shields.io/github/actions/workflow/status/Zevhys/Notes/eslint.yml?label=ESLint&logo=eslint)](https://github.com/Zevhys/Notes/actions/workflows/eslint.yml)
+[![CodeQL](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml/badge.svg)](https://github.com/Zevhys/Notes/actions/workflows/codeql.yml) [![ESLint](https://img.shields.io/github/actions/workflow/status/Zevhys/Notes/eslint.yml?label=ESLint&logo=eslint)](https://github.com/Zevhys/Notes/actions/workflows/eslint.yml) ![Dependabot Status](https://img.shields.io/badge/dependabot-active-brightgreen?logo=dependabot)
+
 
 A simple web application for managing notes (CRUD operations) using Node.js, Express, MongoDB, and EJS. 
 
